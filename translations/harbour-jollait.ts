@@ -81,4 +81,11 @@
         <translation></translation>
     </message>
 </context>
+<context>
+    <name>IdlePage</name>
+    <message>
+        <source>Idle</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>

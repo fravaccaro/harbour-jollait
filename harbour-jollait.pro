@@ -46,4 +46,5 @@ TRANSLATIONS += translations/harbour-jollait-it.ts
 INSTALLS += appicons qml desktop
 
 DISTFILES += \
-    qml/cover/CoverPage.qml
+    qml/cover/CoverPage.qml \
+    qml/pages/IdlePage.qml

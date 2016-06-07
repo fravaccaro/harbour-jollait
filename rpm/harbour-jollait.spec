@@ -13,7 +13,7 @@ Name:       harbour-jollait
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:        Jolla Community Italia WebView
-Version:        0.3.3
+Version:        0.3.5
 Release:        1
 Group:          Qt/Qt
 License:        BSD
@@ -72,6 +72,12 @@ desktop-file-install --delete-original       \
 
 
 %changelog
+* Tue Jun 7 2016 0.3.5
+- Fixed webview high-power consumption.
+
+* Sun Jun 5 2016 0.3.4
+- Database fix.
+
 * Thu Jun 2 2016 0.3.3
 - Fixed webview high-power consumption.
 

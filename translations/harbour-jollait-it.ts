@@ -70,24 +70,32 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="102"/>
+        <location filename="../qml/pages/FirstPage.qml" line="110"/>
         <source>Jolla Italia WebView</source>
         <translation>Jolla Italia WebView</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="105"/>
+        <location filename="../qml/pages/FirstPage.qml" line="113"/>
         <source>Hide navigation bar</source>
         <translation>Nascondi navbar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="106"/>
+        <location filename="../qml/pages/FirstPage.qml" line="114"/>
         <source>Open navigation bar</source>
         <translation>Mostra navbar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="112"/>
+        <location filename="../qml/pages/FirstPage.qml" line="120"/>
         <source>Open in browser</source>
         <translation>Apri nel browser</translation>
+    </message>
+</context>
+<context>
+    <name>IdlePage</name>
+    <message>
+        <location filename="../qml/pages/IdlePage.qml" line="20"/>
+        <source>Idle</source>
+        <translation>In pausa</translation>
     </message>
 </context>
 </TS>
