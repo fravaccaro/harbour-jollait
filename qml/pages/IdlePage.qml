@@ -7,8 +7,8 @@ Page {
        	Connections {
     	   	target: Qt.application
        		onActiveChanged: {
-		       	if(Qt.application.active) {
-				pageStack.replace('FirstPage.qml')
+                if(Qt.application.active) {
+                    pageStack.replace('FirstPage.qml')
 		       	}
 		}
 	}

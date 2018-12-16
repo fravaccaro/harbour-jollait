@@ -13,10 +13,10 @@ Name:       harbour-jollait
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:        Jolla Community Italia WebView
-Version:        0.3.5
+Version:        0.3.7
 Release:        1
 Group:          Qt/Qt
-License:        BSD
+License:        GPLv3
 Packager:       fravaccaro <fravaccaro@jollacommunity.it>
 URL:            www.jollacommunity.it
 Source0:        %{name}-%{version}.tar.bz2
@@ -69,33 +69,3 @@ desktop-file-install --delete-original       \
 %{_datadir}/icons/hicolor/256x256/apps/%{name}.png
 # >> files
 # << files
-
-
-%changelog
-* Tue Jun 7 2016 0.3.5
-- Fixed webview high-power consumption.
-
-* Sun Jun 5 2016 0.3.4
-- Database fix.
-
-* Thu Jun 2 2016 0.3.3
-- Fixed webview high-power consumption.
-
-* Mon May 30 2016 0.3.2
-- Added Open in browser option.
-
-* Fri May 27 2016 0.3.1
-- Icon changed.
-
-* Thu May 3 2016 0.3.0
-- Added navbar. 
-
-* Mon Feb 23 2016 0.2.1
-- Fixed bookmarks. 
-
-* Wed Feb 17 2016 0.2.0
-- Added back button.
-- Added cover.
-
-* Sun Feb 14 2016 0.1
-- First public release.

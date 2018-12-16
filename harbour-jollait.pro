@@ -25,15 +25,23 @@ appicons.path = /usr/share/icons/hicolor/
 appicons.files = appicons/*
 
 OTHER_FILES += \
-    qml/* \
-    qml/pages/* \
-    qml/pages/storage.js \
+    qml/harbour-jollait.qml \
+    qml/pages/AboutPage.qml \
     qml/pages/BookmarkPage.qml \
+    qml/pages/FirstPage.qml \
+    qml/pages/IdlePage.qml \
+    qml/pages/LinksPage.qml \
+    qml/components/BackgroundRectangle.qml \
+    qml/components/BusyState.qml \
+    qml/components/LabelText.qml \
+    qml/components/dockedbar/DockedBar.qml \
+    qml/cover/CoverPage.qml \
     qml/pages/devicePixelRatioHack.js \
+    qml/pages/storage.js \
+    qml/pages/appinfo.png \
+    qml/cover/coverbg.png \
     rpm/harbour-jollait.spec \
-    translations/*.ts \
-    translations/harbour-jollait.ts \
-    translations/harbour-jollait-it.ts \
+    rpm/harbour-jollait.changes \
     harbour-jollait.desktop \
     harbour-jollait.png
 
@@ -41,10 +49,6 @@ OTHER_FILES += \
 # following CONFIG line
 CONFIG += sailfishapp_i18n
 
-TRANSLATIONS += translations/harbour-jollait-it.ts
+TRANSLATIONS += translations/*.ts
 
 INSTALLS += appicons qml desktop
-
-DISTFILES += \
-    qml/cover/CoverPage.qml \
-    qml/pages/IdlePage.qml

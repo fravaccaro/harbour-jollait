@@ -1,0 +1,33 @@
+* Sun Dec 16 2018 0.3.7
+- HTTPS by default.
+- Added links page.
+- Added about page.
+- Redesigned dockbar.
+
+* Tue Jun 7 2016 0.3.5
+- Fixed webview high-power consumption.
+
+* Sun Jun 5 2016 0.3.4
+- Database fix.
+
+* Thu Jun 2 2016 0.3.3
+- Fixed webview high-power consumption.
+
+* Mon May 30 2016 0.3.2
+- Added Open in browser option.
+
+* Fri May 27 2016 0.3.1
+- Icon changed.
+
+* Thu May 3 2016 0.3.0
+- Added navbar. 
+
+* Mon Feb 23 2016 0.2.1
+- Fixed bookmarks. 
+
+* Wed Feb 17 2016 0.2.0
+- Added back button.
+- Added cover.
+
+* Sun Feb 14 2016 0.1
+- First public release.

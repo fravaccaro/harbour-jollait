@@ -36,11 +36,45 @@ import "storage.js" as Storage
 
 Page {
     id: bookmarkPage
+    focus: true
     property bool editMode: false
     property bool searchMode: false
     property string name
     property string url
     property string searchString
+
+
+    Keys.onPressed: {
+        handleKeyPressed(event);
+    }
+
+    function handleKeyPressed(event) {
+
+        if (event.key === Qt.Key_Down) {
+            bookmarkList.flick(0, - bookmarkPage.height);
+            event.accepted = true;
+        }
+
+        if (event.key === Qt.Key_Up) {
+            bookmarkList.flick(0, bookmarkPage.height);
+            event.accepted = true;
+        }
+
+        if (event.key === Qt.Key_PageDown) {
+            bookmarkList.scrollToBottom();
+            event.accepted = true;
+        }
+
+        if (event.key === Qt.Key_PageUp) {
+            bookmarkList.scrollToTop();
+            event.accepted = true;
+        }
+
+        if (event.key === Qt.Key_B) {
+            pageStack.navigateBack();
+            event.accepted = true;
+        }
+}
 
     function loadList() {
         bookmarkModel.clear()
