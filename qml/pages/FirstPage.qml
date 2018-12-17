@@ -48,7 +48,7 @@ Page {
         id: timer
         interval: 120000
         repeat: true
-        onTriggered: pageStack.replace('IdlePage.qml')
+        onTriggered: pageStack.replace('IdlePage.qml', { "webviewurl": webView.url })
     }
 
     Connections {

@@ -14,7 +14,7 @@ Name:       harbour-jollait
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:        Jolla Community Italia
 Version:        0.3.8
-Release:        1
+Release:        2
 Group:          Qt/Qt
 License:        GPLv3
 Packager:       fravaccaro <fravaccaro@jollacommunity.it>
