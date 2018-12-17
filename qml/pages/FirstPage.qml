@@ -39,6 +39,7 @@ Page {
     id: page
     focus: true
 
+    property string webviewurl
     BookmarkPage {id: bookmarkPage} // just don't. I know it's wrong, but the freaking bug won't die!
 
     property bool zoom: false // This is for choosing the pixelratiohack
@@ -115,7 +116,7 @@ Page {
         anchors.fill: parent
         anchors.bottomMargin: dockedbar.height
         clip: true
-        url: "https://www.jollacommunity.it"
+        url: (webviewurl !== "") ? webviewurl :  "https://www.jollacommunity.it"
 
         PullDownMenu {
             MenuItem {

@@ -110,17 +110,17 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="122"/>
+        <location filename="../qml/pages/FirstPage.qml" line="123"/>
         <source>About</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="126"/>
+        <location filename="../qml/pages/FirstPage.qml" line="127"/>
         <source>Useful links</source>
         <translation>Link utili</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="130"/>
+        <location filename="../qml/pages/FirstPage.qml" line="131"/>
         <source>Open in browser</source>
         <translation>Apri nel browser</translation>
     </message>
@@ -128,7 +128,7 @@
 <context>
     <name>IdlePage</name>
     <message>
-        <location filename="../qml/pages/IdlePage.qml" line="20"/>
+        <location filename="../qml/pages/IdlePage.qml" line="21"/>
         <source>Idle</source>
         <translation>In pausa</translation>
     </message>
