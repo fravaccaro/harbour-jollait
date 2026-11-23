@@ -48,7 +48,8 @@ WebViewPage {
 
     property bool zoom: false // This is for choosing the pixelratiohack
 
-    // Sailfish WebView has no flick()/scrollTo*() helpers: scroll the document instead.
+    // Sailfish WebView has no flick(), scrollToTop() or scrollToBottom() helpers:
+    // use runJavaScript() to scroll the document instead.
     function scrollBy(amount) {
         webView.runJavaScript("window.scrollBy(0, " + Math.round(amount) + "); return true;")
     }
@@ -73,12 +74,12 @@ WebViewPage {
        function handleKeyPressed(event) {
 
            if (event.key === Qt.Key_Down) {
-               scrollBy(-page.height);
+               scrollBy(page.height);
                event.accepted = true;
            }
 
            if (event.key === Qt.Key_Up) {
-               scrollBy(page.height);
+               scrollBy(-page.height);
                event.accepted = true;
            }
 
@@ -137,15 +138,7 @@ WebViewPage {
             value: Theme.paddingLarge
         }
 
-        WebViewScrollDecorator {
-            webView: webViewContainer.webView
-        }
-
         PullDownMenu {
-            MenuItem {
-                text: qsTr("Refresh")
-                onClicked: webView.reload()
-            }
             MenuItem {
                 text: qsTr("About")
                 onClicked: pageStack.push(Qt.resolvedUrl("./AboutPage.qml"))
@@ -157,6 +150,10 @@ WebViewPage {
             MenuItem {
                 text: qsTr("Open in browser")
                 onClicked: Qt.openUrlExternally(webView.url)
+            }
+            MenuItem {
+                text: qsTr("Refresh")
+                onClicked: webView.reload()
             }
         }
     }

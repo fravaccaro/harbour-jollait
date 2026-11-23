@@ -33,7 +33,6 @@ OTHER_FILES += \
     qml/components/BackgroundRectangle.qml \
     qml/components/BusyState.qml \
     qml/components/LabelText.qml \
-    qml/components/WebViewScrollDecorator.qml \
     qml/components/dockedbar/DockedBar.qml \
     qml/cover/CoverPage.qml \
     qml/pages/storage.js \
