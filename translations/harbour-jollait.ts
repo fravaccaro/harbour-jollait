@@ -55,10 +55,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Warning: deleting is instant</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -88,6 +84,13 @@
     </message>
 </context>
 <context>
+    <name>DockedBar</name>
+    <message>
+        <source>Share link</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FirstPage</name>
     <message>
         <source>Open in browser</source>
@@ -101,19 +104,16 @@
         <source>Useful links</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Help</name>
     <message>
         <source></source>
         <translation></translation>
-    </message>
-</context>
-<context>
-    <name>IdlePage</name>
-    <message>
-        <source>Idle</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

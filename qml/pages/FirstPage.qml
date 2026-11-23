@@ -29,38 +29,42 @@
 
 import QtQuick 2.1
 import Sailfish.Silica 1.0
-import QtWebKit 3.0
-import QtQuick.LocalStorage 2.0
-import "storage.js" as Storage
+import Sailfish.WebView 1.0
 import "../components"
 import "../components/dockedbar"
 
-Page {
+WebViewPage {
     id: page
     focus: true
 
-    property string webviewurl
+    property alias webView: webViewContainer.webView
+    property real webViewBottomMargin: webView.chrome ? dockedbar.height : 0
+
+    Behavior on webViewBottomMargin {
+        NumberAnimation { duration: 220; easing.type: Easing.InOutQuad }
+    }
+
     BookmarkPage {id: bookmarkPage} // just don't. I know it's wrong, but the freaking bug won't die!
 
     property bool zoom: false // This is for choosing the pixelratiohack
 
-    Timer {
-        id: timer
-        interval: 120000
-        repeat: true
-        onTriggered: pageStack.replace('IdlePage.qml', { "webviewurl": webView.url })
+    // Sailfish WebView has no flick()/scrollTo*() helpers: scroll the document instead.
+    function scrollBy(amount) {
+        webView.runJavaScript("window.scrollBy(0, " + Math.round(amount) + "); return true;")
     }
 
-    Connections {
-        target: Qt.application
-        onActiveChanged: {
-            if(!Qt.application.active) {
-                timer.restart()
-            } else {
-                timer.stop()
-            }
-        }
+    function scrollToTop() {
+        webView.runJavaScript("window.scrollTo(0, 0); return true;")
     }
+
+    function scrollToBottom() {
+        webView.runJavaScript("window.scrollTo(0, Math.max(document.body.scrollHeight, document.documentElement.scrollHeight)); return true;")
+    }
+
+    // No IdlePage replacement is needed: WebView.active already follows
+    // Qt.application.state and the WebViewPage status, so the page is paused
+    // in place while the app is in the background or another page is shown.
+    // Keeping this page alive preserves scroll position and page state.
 
     Keys.onPressed: {
            handleKeyPressed(event);
@@ -69,22 +73,22 @@ Page {
        function handleKeyPressed(event) {
 
            if (event.key === Qt.Key_Down) {
-               webView.flick(0, - page.height);
+               scrollBy(-page.height);
                event.accepted = true;
            }
 
            if (event.key === Qt.Key_Up) {
-               webView.flick(0, page.height);
+               scrollBy(page.height);
                event.accepted = true;
            }
 
            if (event.key === Qt.Key_PageDown) {
-               webView.scrollToBottom();
+               scrollToBottom();
                event.accepted = true;
            }
 
            if (event.key === Qt.Key_PageUp) {
-               webView.scrollToTop();
+               scrollToTop();
                event.accepted = true;
            }
 
@@ -109,16 +113,39 @@ Page {
            }
    }
 
-    // Rewritten for easier readability: all important stuff is at the top
-    SilicaWebView {
-        id: webView
-        _allowFocusAnimation: false
+    // WebViewFlickable provides the Silica flickable required by PullDownMenu.
+    WebViewFlickable {
+        id: webViewContainer
         anchors.fill: parent
-        anchors.bottomMargin: dockedbar.height
-        clip: true
-        url: (webviewurl !== "") ? webviewurl :  "https://www.jollacommunity.it"
+        anchors.bottomMargin: webViewBottomMargin
+
+        Binding {
+            target: webViewContainer.webView
+            property: "url"
+            value: "https://www.jollacommunity.it"
+        }
+
+        Binding {
+            target: webViewContainer.webView
+            property: "chromeGestureEnabled"
+            value: true
+        }
+
+        Binding {
+            target: webViewContainer.webView
+            property: "chromeGestureThreshold"
+            value: Theme.paddingLarge
+        }
+
+        WebViewScrollDecorator {
+            webView: webViewContainer.webView
+        }
 
         PullDownMenu {
+            MenuItem {
+                text: qsTr("Refresh")
+                onClicked: webView.reload()
+            }
             MenuItem {
                 text: qsTr("About")
                 onClicked: pageStack.push(Qt.resolvedUrl("./AboutPage.qml"))
@@ -132,23 +159,26 @@ Page {
                 onClicked: Qt.openUrlExternally(webView.url)
             }
         }
-
-        BusyIndicator {
-            id: webViewBusy
-            anchors.centerIn: parent
-            running: webView.loading
-            size: BusyIndicatorSize.Large
-        }
-
-         experimental.userScripts: [
-             Qt.resolvedUrl("devicePixelRatioHack.js"),
-         ]
     }
 
     DockedBar
     {
         id: dockedbar
         anchors { left: parent.left; bottom: parent.bottom; right: parent.right }
-}
 
+        property bool shown: webView.chrome
+        property real slideOffset: shown ? 0 : height
+
+        opacity: shown ? 1 : 0
+        visible: opacity > 0
+        transform: Translate { y: dockedbar.slideOffset }
+
+        Behavior on slideOffset {
+            NumberAnimation { duration: 220; easing.type: Easing.InOutQuad }
+        }
+
+        Behavior on opacity {
+            FadeAnimation { duration: 220 }
+        }
+    }
 }

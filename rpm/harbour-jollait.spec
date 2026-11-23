@@ -23,7 +23,10 @@ Source0:        %{name}-%{version}.tar.bz2
 BuildArch:      noarch
 Requires:       sailfishsilica-qt5 >= 0.10.9
 Requires:       libsailfishapp-launcher
+Requires:       sailfish-components-webview-qt5
+Requires:       sailfish-components-webview-qt5-popups
 BuildRequires:  desktop-file-utils
+BuildRequires:  pkgconfig(qt5embedwidget)
 
 %description
 Jolla Community Italia WebView. Access to Jolla Community Italia, read news and discuss on the forum.

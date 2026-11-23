@@ -31,7 +31,6 @@
 
 import QtQuick 2.1
 import Sailfish.Silica 1.0
-import QtQuick.LocalStorage 2.0
 import "storage.js" as Storage
 
 Page {
@@ -42,6 +41,14 @@ Page {
     property string name
     property string url
     property string searchString
+    readonly property bool hasBookmarks: bookmarkModel.items.length > 0
+
+    onSearchModeChanged: {
+        if (!searchMode) {
+            searchString = ""
+            bookmarkModel.update()
+        }
+    }
 
 
     Keys.onPressed: {
@@ -76,27 +83,39 @@ Page {
         }
 }
 
-    function loadList() {
-        bookmarkModel.clear()
-        Storage.initialize()
-        Storage.getBookmarksFromDB(bookmarkModel)
-        console.log("Updated bookmark model")
+    function reloadBookmarks() {
+        bookmarkModel.reload()
     }
 
-    function getSortedItems(searchTerm) {
-        filteredModel.clear()
-        for (var i = 0; i < bookmarkModel.count; i++) {
-            if (searchTerm === "" || bookmarkModel.get(i).name.toLowerCase().indexOf(searchTerm) !== -1) {
-                filteredModel.append(bookmarkModel.get(i))
-            }
-        }
-    }
-
+    // The model owns the raw bookmark data and builds the filtered view model
+    // from it, following the standard Silica SearchField/ListModel pattern.
     ListModel {
         id: bookmarkModel
-    }
-    ListModel {
-        id: filteredModel
+
+        property var items: []
+
+        function reload() {
+            Storage.initialize()
+            items = Storage.getBookmarks()
+            update()
+        }
+
+        function update() {
+            var term = bookmarkPage.searchString.trim().toLowerCase()
+            clear()
+
+            for (var i = 0; i < items.length; ++i) {
+                var itemName = items[i].name || ""
+                var itemUrl = items[i].url || ""
+                if (term === ""
+                        || itemName.toLowerCase().indexOf(term) !== -1
+                        || itemUrl.toLowerCase().indexOf(term) !== -1) {
+                    append({ name: itemName, url: itemUrl })
+                }
+            }
+        }
+
+        Component.onCompleted: reload()
     }
 
     SilicaListView {
@@ -120,11 +139,8 @@ Page {
             MenuItem {
                 text: qsTr("Add current page")
                 onClicked: {
-                    bookmarkModel.clear()
-                    Storage.initialize()
                     Storage.addBookmark(name, url)
-                    console.log("Added bookmark " + name + " : " + url)
-                    loadList()
+                    bookmarkPage.reloadBookmarks()
                 }
             }
         }
@@ -151,9 +167,8 @@ Page {
                     anchors.top: parent.top
                     width: parent.width
                     onTextChanged: {
-                        searchString=searchField.text.toLowerCase()
-                        getSortedItems(searchString)
-                        //listView.positionViewAtIndex(0,ListView.Beginning)
+                        bookmarkPage.searchString = searchField.text
+                        bookmarkModel.update()
                     }
                     inputMethodHints: Qt.ImhNoPredictiveText
                     placeholderText: qsTr("Search...")
@@ -165,20 +180,35 @@ Page {
         }
 
         ViewPlaceholder {
-            enabled: !bookmarkPage.searchMode && bookmarkModel.count === 0
+            enabled: !bookmarkPage.hasBookmarks
             text: qsTr("No bookmarks")
             hintText: qsTr("Pull down to add current page to bookmarks")
         }
         ViewPlaceholder {
-            enabled: bookmarkPage.searchMode && filteredModel.count === 0
+            enabled: bookmarkPage.hasBookmarks && bookmarkPage.searchMode && bookmarkModel.count === 0
             text: qsTr("Nothing was found")
             hintText: qsTr("Try a different search term")
         }
-        model: bookmarkPage.searchMode ? filteredModel : bookmarkModel
+        model: bookmarkModel
+        currentIndex: -1
 
         delegate: ListItem {
             id: delegate
-            width: parent.width
+            width: ListView.view.width
+
+            function removeBookmark() {
+                // Capture values and objects: the remorse callback runs in the
+                // remorse component scope, not in this delegate's scope.
+                var nameToDelete = model.name
+                var storage = Storage
+                var bookmarkListPage = bookmarkPage
+
+                remorseDelete(function() {
+                    storage.deleteBookmark(nameToDelete)
+                    bookmarkListPage.reloadBookmarks()
+                })
+            }
+
             onClicked: {
                 webView.url = model.url // Thanks to my way of doing stuff, we can set the url from here without extra variables
                 pageStack.pop(undefined, PageStackAction.Immediate)
@@ -202,16 +232,9 @@ Page {
                                              : parent.width - Theme.paddingLarge
             }
             menu: ContextMenu {
-                MenuLabel {
-                    text: qsTr("Warning: deleting is instant")
-                }
                 MenuItem {
                     text: qsTr("Delete")
-                    onClicked: {
-                        Storage.initialize()
-                        Storage.deleteBookmark(model.name)
-                        loadList()
-                    }
+                    onClicked: delegate.removeBookmark()
                 }
             }
             Separator {
@@ -243,6 +266,5 @@ Page {
             enabled: bookmarkPage.editMode && (index < bookmarkModel.count-1)
             opacity: bookmarkPage.editMode ? 1.0 : 0.0
         }*/
-        Component.onCompleted: loadList()
     }
 }

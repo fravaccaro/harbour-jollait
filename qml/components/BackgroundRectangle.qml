@@ -5,8 +5,7 @@ Rectangle
 {
     id: backgroundrectangle
 
-    gradient: Gradient {
-        GradientStop { position: 0.0; color: Theme.rgba(Theme.highlightBackgroundColor, 0) }
-        GradientStop { position: 1.0; color: Theme.rgba(Theme.highlightBackgroundColor, 0) }
-    }
+    color: Qt.rgba(Theme.highlightDimmerColor.r,
+                   Theme.highlightDimmerColor.g,
+                   Theme.highlightDimmerColor.b, 1)
 }

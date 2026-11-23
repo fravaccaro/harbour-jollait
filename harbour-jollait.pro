@@ -29,14 +29,13 @@ OTHER_FILES += \
     qml/pages/AboutPage.qml \
     qml/pages/BookmarkPage.qml \
     qml/pages/FirstPage.qml \
-    qml/pages/IdlePage.qml \
     qml/pages/LinksPage.qml \
     qml/components/BackgroundRectangle.qml \
     qml/components/BusyState.qml \
     qml/components/LabelText.qml \
+    qml/components/WebViewScrollDecorator.qml \
     qml/components/dockedbar/DockedBar.qml \
     qml/cover/CoverPage.qml \
-    qml/pages/devicePixelRatioHack.js \
     qml/pages/storage.js \
     qml/pages/appinfo.png \
     qml/cover/coverbg.png \
@@ -47,7 +46,11 @@ OTHER_FILES += \
 
 # to disable building translations every time, comment out the
 # following CONFIG line
-CONFIG += sailfishapp_i18n
+CONFIG += sailfishapp_i18n link_pkgconfig
+
+# Required to use the Gecko-based Sailfish WebView:
+# https://sailfishos.org/develop/docs/sailfish-components-webview/
+PKGCONFIG += qt5embedwidget
 
 TRANSLATIONS += translations/*.ts
 

@@ -52,85 +52,85 @@
 <context>
     <name>BookmarkPage</name>
     <message>
-        <location filename="../qml/pages/BookmarkPage.qml" line="114"/>
+        <location filename="../qml/pages/BookmarkPage.qml" line="133"/>
         <source>Hide search</source>
         <translation>Nascondi cerca</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BookmarkPage.qml" line="114"/>
+        <location filename="../qml/pages/BookmarkPage.qml" line="133"/>
         <source>Search</source>
         <translation>Cerca</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BookmarkPage.qml" line="121"/>
+        <location filename="../qml/pages/BookmarkPage.qml" line="140"/>
         <source>Add current page</source>
         <translation>Aggiungi pagina corrente</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BookmarkPage.qml" line="141"/>
+        <location filename="../qml/pages/BookmarkPage.qml" line="157"/>
         <source>Bookmarks</source>
         <translation>Preferiti</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BookmarkPage.qml" line="159"/>
+        <location filename="../qml/pages/BookmarkPage.qml" line="174"/>
         <source>Search...</source>
         <translation>Cerca...</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BookmarkPage.qml" line="169"/>
+        <location filename="../qml/pages/BookmarkPage.qml" line="184"/>
         <source>No bookmarks</source>
         <translation>Nessun preferito</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BookmarkPage.qml" line="170"/>
+        <location filename="../qml/pages/BookmarkPage.qml" line="185"/>
         <source>Pull down to add current page to bookmarks</source>
         <translation>Tira giù per aggiungere la pagina corrente ai preferiti</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BookmarkPage.qml" line="174"/>
+        <location filename="../qml/pages/BookmarkPage.qml" line="189"/>
         <source>Nothing was found</source>
         <translation>Nessun risultato</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BookmarkPage.qml" line="175"/>
+        <location filename="../qml/pages/BookmarkPage.qml" line="190"/>
         <source>Try a different search term</source>
         <translation>Prova con un termine differente</translation>
     </message>
     <message>
-        <location filename="../qml/pages/BookmarkPage.qml" line="206"/>
-        <source>Warning: deleting is instant</source>
-        <translation>Attenzione: l&apos;eliminazione è istantanea</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/BookmarkPage.qml" line="209"/>
+        <location filename="../qml/pages/BookmarkPage.qml" line="236"/>
         <source>Delete</source>
         <translation>Elimina</translation>
     </message>
 </context>
 <context>
+    <name>DockedBar</name>
+    <message>
+        <location filename="../qml/components/dockedbar/DockedBar.qml" line="69"/>
+        <source>Share link</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="123"/>
+        <location filename="../qml/pages/FirstPage.qml" line="146"/>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="150"/>
         <source>About</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="127"/>
+        <location filename="../qml/pages/FirstPage.qml" line="154"/>
         <source>Useful links</source>
         <translation>Link utili</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="131"/>
+        <location filename="../qml/pages/FirstPage.qml" line="158"/>
         <source>Open in browser</source>
         <translation>Apri nel browser</translation>
-    </message>
-</context>
-<context>
-    <name>IdlePage</name>
-    <message>
-        <location filename="../qml/pages/IdlePage.qml" line="21"/>
-        <source>Idle</source>
-        <translation>In pausa</translation>
     </message>
 </context>
 <context>

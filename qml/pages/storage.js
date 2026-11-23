@@ -32,10 +32,12 @@
 */
 
 
+.import QtQuick.LocalStorage 2.0 as LS
+
 //storage.js
 // First, let's create a short helper function to get the database connection
 function getDatabase() {
-    return LocalStorage.openDatabaseSync("jollaitDB", "1.0", "jollaitDB", 100000);
+    return LS.LocalStorage.openDatabaseSync("jollaitDB", "1.0", "jollaitDB", 100000);
 }
 
 // At the start of the application, we can initialize the tables we need if they haven't been created yet
@@ -98,17 +100,18 @@ function deleteBookmark(name) {
     console.log("Deleted bookmark " + name + " from db.")
     return res;
 }
-// This function is used to retrieve stations from the database
-function getBookmarksFromDB(modelToInsertTo) {
-    //console.log("Inserting favs into list...")
+// Return bookmarks as plain data; the QML view owns its ListModel.
+function getBookmarks() {
     var db = getDatabase();
-    var res="";
+    var bookmarks = [];
     db.transaction(function(tx) {
-        var rs = tx.executeSql('SELECT name,url FROM bookmarks;');
+        var rs = tx.executeSql('SELECT name, url FROM bookmarks ORDER BY name COLLATE NOCASE;');
         for (var i = 0; i < rs.rows.length; i++) {
-            modelToInsertTo.insert(i,{"name": rs.rows.item(i).name, "url": rs.rows.item(i).url})
+            bookmarks.push({
+                name: rs.rows.item(i).name,
+                url: rs.rows.item(i).url
+            });
         }
-    })
-    console.log("Bookmarks inserted into list " + modelToInsertTo)
-    return res
+    });
+    return bookmarks;
 }

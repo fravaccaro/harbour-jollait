@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import Sailfish.WebView.Popups 1.0
 import ".."
 
 Item
@@ -9,6 +10,10 @@ Item
     id: dockedbar
     width: parent.width
     height: Theme.itemSizeLarge
+
+    WebShareAction {
+        id: shareAction
+    }
 
     Separator {
         id: dockedbarSeparator
@@ -57,8 +62,12 @@ Item
             height: Theme.itemSizeLarge
             IconButton {
                 anchors.centerIn: parent
-                icon.source: "image://theme/icon-m-refresh"
-                onClicked: webView.reload()
+                icon.source: "image://theme/icon-m-share"
+                onClicked: {
+                    var pageUrl = webView.url.toString()
+                    var pageTitle = webView.title && webView.title.length > 0 ? webView.title : pageUrl
+                    shareAction.shareLink(pageUrl, pageTitle, qsTr("Share link"))
+                }
             }
         }
 
