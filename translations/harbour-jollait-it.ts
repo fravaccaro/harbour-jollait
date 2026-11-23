@@ -142,8 +142,8 @@
     </message>
     <message>
         <location filename="../qml/pages/LinksPage.qml" line="64"/>
-        <source>Join Jolla Community Italia to be updated on the last news about Jolla and Sailfish OS and get in touch with other enthusiasts, like you!</source>
-        <translation>Unisciti a Jolla Community Italia per rimanere aggiornato sulle ultime novità di Jolla e Sailfish OS e conoscere altri appassionati, come te!</translation>
+        <source>Join Jolla Community Italia to get the latest Jolla and Sailfish OS news and connect with other enthusiasts!</source>
+        <translation>Unisciti a Jolla Community Italia per ricevere le ultime novità su Jolla e Sailfish OS ed entrare in contatto con altri appassionati!</translation>
     </message>
     <message>
         <location filename="../qml/pages/LinksPage.qml" line="72"/>

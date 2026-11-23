@@ -29,14 +29,22 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "pages"
 import "cover"
+import "pages"
 
-ApplicationWindow
-{
+ApplicationWindow {
     id: window
-    initialPage: Component { FirstPage { } }
-    cover: CoverPage { }
+
     allowedOrientations: defaultAllowedOrientations
     _defaultPageOrientations: defaultAllowedOrientations
+
+    initialPage: Component {
+        FirstPage {
+        }
+
+    }
+
+    cover: CoverPage {
+    }
+
 }

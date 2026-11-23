@@ -1,11 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Rectangle
-{
+Rectangle {
     id: backgroundrectangle
 
-    color: Qt.rgba(Theme.highlightDimmerColor.r,
-                   Theme.highlightDimmerColor.g,
-                   Theme.highlightDimmerColor.b, 1)
+    color: Qt.rgba(Theme.highlightDimmerColor.r, Theme.highlightDimmerColor.g, Theme.highlightDimmerColor.b, 1)
 }

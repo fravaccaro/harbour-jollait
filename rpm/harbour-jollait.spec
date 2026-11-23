@@ -14,7 +14,7 @@ Name:       harbour-jollait
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:        Jolla Community Italia
 Version:        0.4.0
-Release:        3
+Release:        5
 Group:          Qt/Qt
 License:        GPLv3
 Source0:        %{name}-%{version}.tar.bz2

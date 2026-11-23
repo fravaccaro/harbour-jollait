@@ -35,7 +35,7 @@ import "storage.js" as Storage
 
 Page {
     id: bookmarkPage
-    focus: true
+
     property bool editMode: false
     property bool searchMode: false
     property string name
@@ -43,48 +43,42 @@ Page {
     property string searchString
     readonly property bool hasBookmarks: bookmarkModel.items.length > 0
 
-    onSearchModeChanged: {
-        if (!searchMode) {
-            searchString = ""
-            bookmarkModel.update()
-        }
-    }
-
-
-    Keys.onPressed: {
-        handleKeyPressed(event);
-    }
-
     function handleKeyPressed(event) {
-
         if (event.key === Qt.Key_Down) {
-            bookmarkList.flick(0, - bookmarkPage.height);
+            bookmarkList.flick(0, -bookmarkPage.height);
             event.accepted = true;
         }
-
         if (event.key === Qt.Key_Up) {
             bookmarkList.flick(0, bookmarkPage.height);
             event.accepted = true;
         }
-
         if (event.key === Qt.Key_PageDown) {
             bookmarkList.scrollToBottom();
             event.accepted = true;
         }
-
         if (event.key === Qt.Key_PageUp) {
             bookmarkList.scrollToTop();
             event.accepted = true;
         }
-
         if (event.key === Qt.Key_B) {
             pageStack.navigateBack();
             event.accepted = true;
         }
-}
+    }
 
     function reloadBookmarks() {
-        bookmarkModel.reload()
+        bookmarkModel.reload();
+    }
+
+    focus: true
+    onSearchModeChanged: {
+        if (!searchMode) {
+            searchString = "";
+            bookmarkModel.update();
+        }
+    }
+    Keys.onPressed: {
+        handleKeyPressed(event);
     }
 
     // The model owns the raw bookmark data and builds the filtered view model
@@ -95,23 +89,23 @@ Page {
         property var items: []
 
         function reload() {
-            Storage.initialize()
-            items = Storage.getBookmarks()
-            update()
+            Storage.initialize();
+            items = Storage.getBookmarks();
+            update();
         }
 
         function update() {
-            var term = bookmarkPage.searchString.trim().toLowerCase()
-            clear()
-
+            var term = bookmarkPage.searchString.trim().toLowerCase();
+            clear();
             for (var i = 0; i < items.length; ++i) {
-                var itemName = items[i].name || ""
-                var itemUrl = items[i].url || ""
-                if (term === ""
-                        || itemName.toLowerCase().indexOf(term) !== -1
-                        || itemUrl.toLowerCase().indexOf(term) !== -1) {
-                    append({ name: itemName, url: itemUrl })
-                }
+                var itemName = items[i].name || "";
+                var itemUrl = items[i].url || "";
+                if (term === "" || itemName.toLowerCase().indexOf(term) !== -1 || itemUrl.toLowerCase().indexOf(term) !== -1)
+                    append({
+                        "name": itemName,
+                        "url": itemUrl
+                    });
+
             }
         }
 
@@ -120,63 +114,38 @@ Page {
 
     SilicaListView {
         id: bookmarkList
+
+        anchors.fill: parent
+        model: bookmarkModel
+        currentIndex: -1
+
         PullDownMenu {
             // Disabled for now
-            /*MenuItem {
-                text: bookmarkPage.editMode ? qsTr("Disable re-arranging") : qsTr("Enable re-arranging")
-                onClicked: {
-                    bookmarkPage.editMode ? bookmarkPage.editMode = false
-                                          : bookmarkPage.editMode = true
-                }
-            }*/
+            //MenuItem {
+            //                text: bookmarkPage.editMode ? qsTr("Disable re-arranging") : qsTr("Enable re-arranging")
+            //                onClicked: {
+            //                    bookmarkPage.editMode ? bookmarkPage.editMode = false
+            //                                          : bookmarkPage.editMode = true
+            //                }
+            //            }
             MenuItem {
                 text: bookmarkPage.searchMode ? qsTr("Hide search") : qsTr("Search")
                 onClicked: {
-                    bookmarkPage.searchMode ? bookmarkPage.searchMode = false
-                                            : bookmarkPage.searchMode = true
+                    bookmarkPage.searchMode ? bookmarkPage.searchMode = false : bookmarkPage.searchMode = true;
                 }
             }
+
             MenuItem {
                 text: qsTr("Add current page")
                 onClicked: {
-                    Storage.addBookmark(name, url)
-                    bookmarkPage.reloadBookmarks()
+                    Storage.addBookmark(name, url);
+                    bookmarkPage.reloadBookmarks();
                 }
             }
+
         }
-        VerticalScrollDecorator {}
-        anchors.fill: parent
-        header: Loader {
-            width: parent.width
 
-            sourceComponent: bookmarkPage.searchMode ? search : header
-
-            Component {
-                id: header
-                PageHeader {
-                    title: qsTr("Bookmarks")
-                }
-            }
-
-            Component {
-                id: search
-
-                SearchField {
-                    id: searchField
-                    //visible: mainPage.searchMode
-                    anchors.top: parent.top
-                    width: parent.width
-                    onTextChanged: {
-                        bookmarkPage.searchString = searchField.text
-                        bookmarkModel.update()
-                    }
-                    inputMethodHints: Qt.ImhNoPredictiveText
-                    placeholderText: qsTr("Search...")
-                    EnterKey.onClicked: {
-                        focus = false
-                    }
-                }
-            }
+        VerticalScrollDecorator {
         }
 
         ViewPlaceholder {
@@ -184,43 +153,78 @@ Page {
             text: qsTr("No bookmarks")
             hintText: qsTr("Pull down to add current page to bookmarks")
         }
+
         ViewPlaceholder {
             enabled: bookmarkPage.hasBookmarks && bookmarkPage.searchMode && bookmarkModel.count === 0
             text: qsTr("Nothing was found")
             hintText: qsTr("Try a different search term")
         }
-        model: bookmarkModel
-        currentIndex: -1
+
+        header: Loader {
+            width: parent.width
+            sourceComponent: bookmarkPage.searchMode ? search : header
+
+            Component {
+                id: header
+
+                PageHeader {
+                    title: qsTr("Bookmarks")
+                }
+
+            }
+
+            Component {
+                id: search
+
+                SearchField {
+                    id: searchField
+
+                    //visible: mainPage.searchMode
+                    anchors.top: parent.top
+                    width: parent.width
+                    onTextChanged: {
+                        bookmarkPage.searchString = searchField.text;
+                        bookmarkModel.update();
+                    }
+                    inputMethodHints: Qt.ImhNoPredictiveText
+                    placeholderText: qsTr("Search...")
+                    EnterKey.onClicked: {
+                        focus = false;
+                    }
+                }
+
+            }
+
+        }
 
         delegate: ListItem {
             id: delegate
-            width: ListView.view.width
 
             function removeBookmark() {
                 // Capture values and objects: the remorse callback runs in the
                 // remorse component scope, not in this delegate's scope.
-                var nameToDelete = model.name
-                var storage = Storage
-                var bookmarkListPage = bookmarkPage
-
+                var nameToDelete = model.name;
+                var storage = Storage;
+                var bookmarkListPage = bookmarkPage;
                 remorseDelete(function() {
-                    storage.deleteBookmark(nameToDelete)
-                    bookmarkListPage.reloadBookmarks()
-                })
+                    storage.deleteBookmark(nameToDelete);
+                    bookmarkListPage.reloadBookmarks();
+                });
             }
 
+            width: ListView.view.width
             onClicked: {
-                webView.url = model.url // Thanks to my way of doing stuff, we can set the url from here without extra variables
-                pageStack.pop(undefined, PageStackAction.Immediate)
+                webView.url = model.url; // Thanks to my way of doing stuff, we can set the url from here without extra variables
+                pageStack.pop(undefined, PageStackAction.Immediate);
             }
+
             Text {
                 id: listText
+
                 text: Theme.highlightText(model.name, searchString, Theme.highlightColor)
                 textFormat: Text.StyledText
                 color: highlighted ? Theme.highlightColor : Theme.primaryColor
-                font.pixelSize: Screen.sizeCategory > Screen.Medium
-                                ? Theme.fontSizeExtraLarge
-                                : Theme.fontSizeMedium
+                font.pixelSize: Screen.sizeCategory > Screen.Medium ? Theme.fontSizeExtraLarge : Theme.fontSizeMedium
                 anchors.verticalCenter: parent.verticalCenter
                 x: Theme.paddingLarge
                 //truncationMode: TruncationMode.Elide
@@ -228,15 +232,9 @@ Page {
                 wrapMode: Text.Wrap
                 clip: true
                 maximumLineCount: 2
-                width: bookmarkPage.editMode ? parent.width - ((moveUp.width * 2) + (Theme.paddingLarge * 2))
-                                             : parent.width - Theme.paddingLarge
+                width: bookmarkPage.editMode ? parent.width - ((moveUp.width * 2) + (Theme.paddingLarge * 2)) : parent.width - Theme.paddingLarge
             }
-            menu: ContextMenu {
-                MenuItem {
-                    text: qsTr("Delete")
-                    onClicked: delegate.removeBookmark()
-                }
-            }
+
             Separator {
                 //alignment: Qt.AlignHCenter Yeah, reference documentation is still not fixed :(
                 width: parent.width - (2 * Theme.paddingLarge)
@@ -244,6 +242,15 @@ Page {
                 color: Theme.secondaryColor
                 x: Theme.paddingLarge
             }
+
+            menu: ContextMenu {
+                MenuItem {
+                    text: qsTr("Delete")
+                    onClicked: delegate.removeBookmark()
+                }
+
+            }
+
         }
         /*IconButton {
             id: moveUp
@@ -266,5 +273,7 @@ Page {
             enabled: bookmarkPage.editMode && (index < bookmarkModel.count-1)
             opacity: bookmarkPage.editMode ? 1.0 : 0.0
         }*/
+
     }
+
 }

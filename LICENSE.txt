@@ -1,5 +1,4 @@
-muoviroma - Muoversiaroma.it WebView. Look for public transportation and plan your trip in Rome!.
-Copyright (C) 2016,  fravaccaro <fravaccaro90@gmail.com>
+Copyright (C) 2016, fravaccaro
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

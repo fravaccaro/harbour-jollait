@@ -32,10 +32,9 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 CoverBackground {
-
-    Image
-    {
+    Image {
         id: coverimg
+
         fillMode: Image.PreserveAspectFit
         source: "./coverbg.png"
         opacity: 0.6
@@ -45,5 +44,3 @@ CoverBackground {
     }
 
 }
-
-

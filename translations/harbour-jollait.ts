@@ -123,7 +123,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Join Jolla Community Italia to be updated on the last news about Jolla and Sailfish OS and get in touch with other enthusiasts, like you!</source>
+        <source>Join Jolla Community Italia to get the latest Jolla and Sailfish OS news and connect with other enthusiasts!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
