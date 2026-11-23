@@ -68,7 +68,7 @@ Page
             }
 
             LabelText {
-                text: qsTr("Access to Jolla Community Italia, read news and discuss on the forum.")
+                text: qsTr("Official web client for jollacommunity.it. Read the latest Sailfish OS news, updates, and articles from the Italian Jolla community.")
             }
 
             LabelText {

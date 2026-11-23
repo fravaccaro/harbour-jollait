@@ -10,8 +10,8 @@
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="71"/>
-        <source>Access to Jolla Community Italia, read news and discuss on the forum.</source>
-        <translation>Accedi a Jolla Community Italia, leggi notizie e discuti sul forum.</translation>
+        <source>Official web client for jollacommunity.it. Read the latest Sailfish OS news, updates, and articles from the Italian Jolla community.</source>
+        <translation>Client web ufficiale per jollacommunity.it. Leggi le ultime notizie, gli aggiornamenti e gli articoli su Sailfish OS dalla community italiana di Jolla.</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="75"/>
@@ -107,7 +107,7 @@
     <message>
         <location filename="../qml/components/dockedbar/DockedBar.qml" line="69"/>
         <source>Share link</source>
-        <translation type="unfinished"></translation>
+        <translation>Condividi collegamento</translation>
     </message>
 </context>
 <context>
@@ -115,7 +115,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="146"/>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricarica</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="150"/>

@@ -36,7 +36,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Access to Jolla Community Italia, read news and discuss on the forum.</source>
+        <source>Official web client for jollacommunity.it. Read the latest Sailfish OS news, updates, and articles from the Italian Jolla community.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

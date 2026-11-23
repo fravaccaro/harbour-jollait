@@ -46,8 +46,6 @@ WebViewPage {
 
     BookmarkPage {id: bookmarkPage} // just don't. I know it's wrong, but the freaking bug won't die!
 
-    property bool zoom: false // This is for choosing the pixelratiohack
-
     // Sailfish WebView has no flick(), scrollToTop() or scrollToBottom() helpers:
     // use runJavaScript() to scroll the document instead.
     function scrollBy(amount) {

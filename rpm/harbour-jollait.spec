@@ -13,8 +13,8 @@ Name:       harbour-jollait
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:        Jolla Community Italia
-Version:        0.3.8
-Release:        2
+Version:        0.4.0
+Release:        1
 Group:          Qt/Qt
 License:        GPLv3
 Packager:       fravaccaro <fravaccaro@jollacommunity.it>
@@ -29,7 +29,7 @@ BuildRequires:  desktop-file-utils
 BuildRequires:  pkgconfig(qt5embedwidget)
 
 %description
-Jolla Community Italia WebView. Access to Jolla Community Italia, read news and discuss on the forum.
+Jolla Community Italia WebView. Official web client for jollacommunity.it. Read the latest Sailfish OS news, updates, and articles from the Italian Jolla community.
 
 
 %prep

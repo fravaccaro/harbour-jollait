@@ -1,6 +1,6 @@
 # Jolla Community Italia
 
-Access to Jolla Community Italia, read news and discuss on the forum.
+Official web client for jollacommunity.it. Read the latest Sailfish OS news, updates, and articles from the Italian Jolla community.
 
 ## Building on current Sailfish OS
 
